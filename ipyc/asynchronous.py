@@ -163,7 +163,7 @@ class AsyncIPyCHost:
         documentation for these arguments and their use.
 
         """
-        self._server = await asyncio.start_server(self.__handle_connection, host=self._ip_address, port=self._port, loop=self.loop, *args)
+        self._server = await asyncio.start_server(self.__handle_connection, host=self._ip_address, port=self._port, *args)
 
     def run(self, *args):
         """A blocking call that begins server listening and abstracts
@@ -278,7 +278,7 @@ class AsyncIPyCClient:
         :class:`AsyncIPyCLink`
             The connection that has been established with a :class:`AsyncIPyCHost`.
         """
-        reader, writer = await asyncio.open_connection(host=self._ip_address, port=self._port, loop=self.loop, *args)
+        reader, writer = await asyncio.open_connection(host=self._ip_address, port=self._port, *args)
         self._link = AsyncIPyCLink(reader, writer, self)
         return self._link
 
